@@ -1,0 +1,8 @@
+{
+  "hello": "Hello",
+  "balance": "Your available balance",
+  "send": "Send",
+  "receive": "Receive",
+  "swap": "Swap",
+  "buy_sell": "Buy & Sell"
+}
