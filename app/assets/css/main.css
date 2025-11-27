@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --color-background: #111820;
+  --color-primary: #2db52f;
+  --color-light: #cbfbf1;
+  --color-border: #111820;
+  --color-heading: #13163f;
+  --color-body: #132348;
+
+  --color-success: #0e9a5f;
+  --color-warning: #fdae1c;
+  --color-danger: #ff4040;
+  --color-info: #1c8bef;
+
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  dialog {
+    margin: auto;
+  }
+}
+
+@layer components {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 430px;
+  }
+}
