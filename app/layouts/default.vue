@@ -1,15 +1,13 @@
 <script setup></script>
 
 <template>
-  <div class="bg-background max-w-sm mx-auto">
-    <Header />
+  <Header />
 
-    <main class="w-full overflow-y-auto px-4">
-      <slot />
-    </main>
+  <main>
+    <slot />
+  </main>
 
-    <Footer />
-  </div>
+  <Footer />
 </template>
 
 <style scoped></style>
