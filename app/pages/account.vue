@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+const logout = async () => {
+  await navigateTo("/auth/login");
+};
+</script>
 
 <template>
   <div class="w-full space-y-4 px-4">
@@ -117,6 +121,7 @@
       </a>
 
       <button
+        @click.prevent="logout"
         class="w-full group flex items-center justify-between border border-border rounded px-4 py-2.5"
       >
         <div class="flex justify-start items-center gap-3">

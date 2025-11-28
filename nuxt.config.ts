@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n', '@pinia/nuxt'],
 
   i18n: {
     defaultLocale: 'bn',
