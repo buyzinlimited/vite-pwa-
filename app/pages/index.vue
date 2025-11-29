@@ -1,16 +1,30 @@
 <script setup>
-const { locales, setLocale } = useI18n();
+const depositDialog = ref(false);
+const withdrawDialog = ref(false);
 
-const switchLang = () => {
-  locale.value = locale.value === "en" ? "bn" : "en";
-};
+const deposit = reactive({
+  amount: 0,
+  payment_method: "",
+  trx_id: "",
+});
+const withdraw = reactive({
+  amount: 0,
+  payment_method: "",
+  account: "",
+});
+
+const paymentMethods = [
+  { label: "Bkash", value: "bkash" },
+  { label: "Nagad", value: "nagad" },
+  { label: "Rocket", value: "rocket" },
+  { label: "Upay", value: "upay" },
+];
 </script>
 
 <template>
-  <div class="w-full space-y-4 px-4">
-    <!-- Balance Section -->
-    <div class="space-y-2">
-      <p class="text-n70 text-sm">Your available balance</p>
+  <div class="w-full px-4 py-4">
+    <div class="space-y-2 py-2">
+      <p class="text-body text-sm">{{ $t("balance") }}</p>
 
       <div class="flex items-center gap-3">
         <img src="/assets/images/1INCH_icon.png" class="size-8" alt="" />
@@ -22,37 +36,33 @@ const switchLang = () => {
       </p>
     </div>
 
-    <div class="flex items-center gap-4">
-      <a
-        href="/"
+    <div class="flex items-center gap-4 py-4">
+      <button
+        type="button"
+        @click="depositDialog = true"
         class="px-4 py-2 border border-dashed border-primary rounded-xl w-full flex justify-center items-center gap-3 text-white font-medium"
       >
         <span
-          class="flex justify-center items-center p-2 text-white bg-primary rounded-full"
-          ><UIcon name="i-lucide-upload" class="size-6"
+          class="flex justify-center items-center p-3 text-primary bg-white/5 rounded-full"
+          ><UIcon name="i-lucide-upload" class="size-5"
         /></span>
         Deposit
-      </a>
-      <a
-        href="/"
+      </button>
+
+      <button
+        type="button"
+        @click="withdrawDialog = true"
         class="px-4 py-2 border border-dashed border-primary rounded-xl w-full flex justify-center items-center gap-3 text-white font-medium"
       >
         <span
-          class="flex justify-center items-center p-2 text-white bg-primary rounded-full"
+          class="flex justify-center items-center p-3 text-primary bg-white/5 rounded-full"
         >
-          <UIcon name="i-lucide-download" class="size-6" />
+          <UIcon name="i-lucide-download" class="size-5" />
         </span>
         Withdraw
-      </a>
+      </button>
     </div>
 
-    <!-- <button v-for="locale in locales" @click="setLocale(locale.code)">
-      {{ locale.name }}
-    </button>
-
-    <h1>{{ $t("balance") }}</h1> -->
-
-    <!-- Invite Banner -->
     <div
       class="relative bg-green-300/10 p-5 rounded-xl overflow-hidden flex justify-between items-center"
     >
@@ -73,15 +83,13 @@ const switchLang = () => {
       <img src="/assets/images/invite_img.png" class="w-20" />
     </div>
 
-    <!-- Top Gainers -->
-    <div class="">
+    <div class="py-4">
       <div class="flex justify-between items-center">
-        <p class="text-xl text-white font-semibold">Top Gainers</p>
-        <a href="./top-gainers.html" class="text-sm text-primary">View All</a>
+        <p class="text-xl text-white font-semibold">Today's Package</p>
+        <NuxtLink to="/" class="text-sm text-primary">View All</NuxtLink>
       </div>
 
-      <div class="py-6 space-y-4">
-        <!-- Item -->
+      <div class="py-4 space-y-4">
         <div
           v-for="value in 5"
           class="flex justify-between items-center bg-white/5 px-4 py-2.5 rounded-xl"
@@ -93,18 +101,24 @@ const switchLang = () => {
               <img
                 src="/assets/images/logo.png"
                 alt="level"
-                class="size-12 object-cover"
+                class="size-14 object-cover rounded"
               />
             </div>
 
-            <div class="text-sm">
+            <div class="text-xs leading-relaxed">
               <div class="space-x-2">
-                <span class="text-white">20.00</span>
-                <span>/Each Order</span>
+                <span class="text-body font-medium">Package:</span>
+                <span class="text-primary">Premium</span>
               </div>
+
               <div class="space-x-2">
-                <span class="text-white">Daily Tasks: </span>
-                <span>10</span>
+                <span class="text-body font-medium">Validity:</span>
+                <span class="text-primary">30 Days</span>
+              </div>
+
+              <div class="space-x-2">
+                <span class="text-body font-medium">Daily Tasks:</span>
+                <span class="text-primary">10</span>
               </div>
             </div>
           </div>
@@ -123,4 +137,70 @@ const switchLang = () => {
       </div>
     </div>
   </div>
+
+  <!-- Deposit Dialog -->
+  <BaseBottomSheet v-model="depositDialog" title="Deposit">
+    <template #body>
+      <form @submit.prevent="" class="space-y-4">
+        <input
+          type="text"
+          v-model="deposit.amount"
+          placeholder="Enter Amount"
+          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+        />
+
+        <select
+          v-model="deposit.payment_method"
+          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm appearance-none"
+        >
+          <option value="" disabled>Select Method</option>
+          <option :value="method.value" v-for="method in paymentMethods">
+            {{ method.label }}
+          </option>
+        </select>
+
+        <input
+          type="text"
+          v-model="deposit.trx_id"
+          placeholder="Enter TRX ID"
+          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+        />
+
+        <BaseButton class="w-full">Confirm Deposit</BaseButton>
+      </form>
+    </template>
+  </BaseBottomSheet>
+
+  <!-- Withdraw Dialog -->
+  <BaseBottomSheet v-model="withdrawDialog" title="Withdraw">
+    <template #body>
+      <form @submit.prevent="" class="space-y-4">
+        <input
+          type="text"
+          v-model="withdraw.amount"
+          placeholder="Enter Amount"
+          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+        />
+
+        <select
+          v-model="withdraw.payment_method"
+          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm appearance-none"
+        >
+          <option value="" disabled>Select Method</option>
+          <option :value="method.value" v-for="method in paymentMethods">
+            {{ method.label }}
+          </option>
+        </select>
+
+        <input
+          type="text"
+          v-model="withdraw.account"
+          placeholder="Enter account number"
+          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+        />
+
+        <BaseButton class="w-full">Confirm Withdraw</BaseButton>
+      </form>
+    </template>
+  </BaseBottomSheet>
 </template>

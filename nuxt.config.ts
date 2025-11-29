@@ -21,7 +21,7 @@ export default defineNuxtConfig({
         lang: 'en',
       },
       bodyAttrs: {
-        class: 'antialiased h-screen bg-gray-100 font-sans',
+        class: 'antialiased h-screen bg-white text-body font-sans',
       },
     },
   },
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxtjs/i18n', '@pinia/nuxt'],
 
   i18n: {
-    defaultLocale: 'bn',
+    defaultLocale: 'en',
     strategy: 'no_prefix',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },
