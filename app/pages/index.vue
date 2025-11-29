@@ -146,12 +146,12 @@ const paymentMethods = [
           type="text"
           v-model="deposit.amount"
           placeholder="Enter Amount"
-          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+          class="w-full bg-white/5 px-4 py-4 rounded-lg outline-none text-sm"
         />
 
         <select
           v-model="deposit.payment_method"
-          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm appearance-none"
+          class="w-full bg-white/5 px-4 py-4 rounded-lg outline-none text-sm appearance-none"
         >
           <option value="" disabled>Select Method</option>
           <option :value="method.value" v-for="method in paymentMethods">
@@ -163,7 +163,7 @@ const paymentMethods = [
           type="text"
           v-model="deposit.trx_id"
           placeholder="Enter TRX ID"
-          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+          class="w-full bg-white/5 px-4 py-4 rounded-lg outline-none text-sm"
         />
 
         <BaseButton class="w-full">Confirm Deposit</BaseButton>
@@ -179,12 +179,12 @@ const paymentMethods = [
           type="text"
           v-model="withdraw.amount"
           placeholder="Enter Amount"
-          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+          class="w-full bg-white/5 px-4 py-4 rounded-lg outline-none text-sm"
         />
 
         <select
           v-model="withdraw.payment_method"
-          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm appearance-none"
+          class="w-full bg-white/5 px-4 py-4 rounded-lg outline-none text-sm appearance-none"
         >
           <option value="" disabled>Select Method</option>
           <option :value="method.value" v-for="method in paymentMethods">
@@ -196,7 +196,7 @@ const paymentMethods = [
           type="text"
           v-model="withdraw.account"
           placeholder="Enter account number"
-          class="w-full bg-white/5 px-4 py-3 rounded-lg outline-none text-sm"
+          class="w-full bg-white/5 px-4 py-4 rounded-lg outline-none text-sm"
         />
 
         <BaseButton class="w-full">Confirm Withdraw</BaseButton>

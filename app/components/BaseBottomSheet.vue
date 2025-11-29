@@ -22,9 +22,7 @@ const close = () => emit("update:modelValue", false);
       :class="modelValue ? 'translate-y-0' : 'translate-y-full'"
     >
       <div class="bg-background rounded-t-2xl">
-        <header
-          class="shadow-2xl flex justify-between items-center px-4 py-4 border-b border-gray-700 border-dashed"
-        >
+        <header class="shadow-2xl flex justify-between items-center px-4 py-4">
           <h4 class="text-lg font-semibold text-body">{{ title }}</h4>
           <button
             type="button"
